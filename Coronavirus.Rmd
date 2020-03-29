@@ -1,0 +1,222 @@
+---
+title: "Coronavirus"
+author: "María A. Ramírez y Manuel A. Tellechea"
+date: "3/29/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Situación COVID-19 en España
+
+Toda la data utilizada para representar la siguiente información, proviene de la página oficial del Ministerio de Sanidad del Gobierno Español <https://covid19.isciii.es>.
+
+
+```{r setup, include=FALSE}
+library(formattable)
+library(lubridate)
+library(ggplot2)
+library(ggpmisc)
+library(RColorBrewer)
+library(knitr)
+library(plot3D)
+library(scatterplot3d)
+library(grid)
+library(gridExtra)
+library(dplyr)
+```
+
+```{r cars}
+data <- read.csv("serie_historica_acumulados.csv", header = TRUE)
+data[is.na(data)] = 0
+dim(data)
+data <- data[-c(723),] #borrando el comentario inserto en las últimas dos filas
+Fecha <- dmy(data$Fecha)
+data <- cbind(Fecha, data[,-2])
+data
+names(data)
+data <- data[, c("CCAA.Codigo.ISO", "Fecha", "Casos", "Hospitalizados", "UCI", "Fallecidos")]
+data
+```
+
+```{r}
+
+ggplot(data = data) +
+  geom_smooth(mapping = aes(x = Fecha, y = Casos, group = CCAA.Codigo.ISO, color = CCAA.Codigo.ISO))
+
+```
+
+## Agrupación de datos por Provincia
+
+```{r}
+data_AN <- filter(data, CCAA.Codigo.ISO == "AN")
+data_AR <- filter(data, CCAA.Codigo.ISO == "AR")
+data_AS <- filter(data, CCAA.Codigo.ISO == "AS")
+data_IB <- filter(data, CCAA.Codigo.ISO == "IB")
+data_CN <- filter(data, CCAA.Codigo.ISO == "CN")
+data_CB <- filter(data, CCAA.Codigo.ISO == "CB")
+data_CM <- filter(data, CCAA.Codigo.ISO == "CM")
+data_CL <- filter(data, CCAA.Codigo.ISO == "CL")
+data_CT <- filter(data, CCAA.Codigo.ISO == "CT")
+data_CE <- filter(data, CCAA.Codigo.ISO == "CE")
+data_VC <- filter(data, CCAA.Codigo.ISO == "VC")
+data_EX <- filter(data, CCAA.Codigo.ISO == "EX")
+data_GA <- filter(data, CCAA.Codigo.ISO == "GA")
+data_MD <- filter(data, CCAA.Codigo.ISO == "MD")
+data_ME <- filter(data, CCAA.Codigo.ISO == "ME")
+data_MC <- filter(data, CCAA.Codigo.ISO == "MC")
+data_NC <- filter(data, CCAA.Codigo.ISO == "NC")
+data_PV <- filter(data, CCAA.Codigo.ISO == "PV")
+data_RI <- filter(data, CCAA.Codigo.ISO == "RI")
+```
+
+## Cálculos
+
+```{r}
+data
+```
+
+
+## Gráficos
+
+
+```{r}
+
+g <- ggplot(data = data_MD) + geom_point(mapping = aes(x = Fecha, y = Casos, color = "Madrid")) +
+  labs(title = "Casos Confirmados", caption = "Data from: https://covid19.isciii.es") + 
+  labs(subtitle = date()) +
+  labs(x = "Fecha", y = "Cantidad") +
+  geom_point(data_CT, mapping = aes(x = Fecha, y = Casos, color = "Cataluña"))
+g + theme_classic() + guides(colour = guide_legend("Provincias"))
+```
+
+```{r}
+grid.arrange(p1, p2, p3, p4, ncol = 2) #Varios gráficos en un mismo panel
+```
+
+
+## Gráficos
+
+```{r}
+flujos_de_caja <- function(p,n,r,ttm){
+  r <- r/100
+  cf <- c(-p, rep(n*r, ttm-1), n*(1+r))
+  cf
+}
+
+# Definimos las variables
+
+p <- 1000
+n <- 1000
+r <- 7
+ttm <- 5
+
+# Una vez creada la función, calculamos los flujos y los alojamos en
+# un objeto que llamaremos cf.
+
+cf <- flujos_de_caja(p,n,r,ttm)
+
+
+# Creamos la función `bval` que utiliza la misma lógica de la función precio() 
+# para obtener el total del valor presente de los flujos de caja.
+
+bval <- function(i, cf, t=seq(along = cf)) {
+ sum(cf / (1 + i)^t)
+}
+
+
+# Por último, creamos la función YTM() que utiliza la función uniroot()
+# para hallar la raíz de la función bval() y encontrar el valor en el cual
+# se hace cero; que no es más que hallar el YTM que iguala el precio del
+# bono al valor presente de los flujos de caja.
+
+YTM <- function(cf){
+  yield <-uniroot(bval, c(0, 1), cf = cf)$root
+  yield
+}
+
+YTM(cf)
+```
+
+
+```{r}
+precios <- c(747.550, 660.000, 463.750, 391.030, 467.530, 354.580, 347.170, 340.700, 387.350, 395.770, 346.700, 403.780, 362.530, 330.850)
+
+vencimientos <- c(1,1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 14, 16, 21)
+
+cupones <- c(13.625, 7, 7.75, 6, 12.75, 9, 8.25, 7.65, 11.75, 9.25, 9.25, 11.95, 9.375, 7)
+
+rendimientos <- c()
+
+for(i in 1: length(precios)){
+  cf <- flujos_de_caja(precios[i], n = 1000, r = cupones[i], ttm = vencimientos[i])
+  rendimientos <- c(rendimientos, YTM(cf)*100)
+}
+
+datos <- data.frame(rendimientos, vencimientos)
+
+f<- ggplot(datos, aes(x = vencimientos, y = rendimientos, colour = vencimientos)) +
+    geom_point() + geom_smooth(method = "lm", se = FALSE, formula = y ~ x +I(x^2), size = 0.8) +
+  stat_poly_eq(formula = y ~ x + I(x^2), 
+                aes(label = paste(..eq.label.., ..rr.label.., sep = "~~~")), 
+                parse = TRUE, size=3, label.x.npc = "right", label.y.npc = "top")+
+  scale_x_discrete(limits=vencimientos)+
+  labs(title = "Curva de Rendimiento",
+       subtitle = "25-09-2017",x="Tiempo de vencimiento", y="Rendimiento",
+       caption = "http://synergy.vision/" ) 
+
+f
+
+```
+
+
+# Modelo SIR
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+library(deSolve)
+#tamaño poblacional
+N = 1
+#estado inicial de los compartimentos
+init <- c(S = 1-1e-6,
+          I = 1e-6,
+          R = 0)
+#parámetros del modelo (coeficientes de las variables)
+param <- c(beta = 1.4247,
+           gamma = 0.14286)
+#crear la función con las ODE
+sir <- function(times, init, param) {
+  with(as.list(c(init, param)), {
+#ecuaciones diferenciales   
+    dS <- -beta * S * I
+    dI <-  beta * S * I - gamma * I
+    dR <-                 gamma * I
+#resultados de las tasas de cambio    
+    return(list(c(dS, dI, dR)))
+  })
+}
+#intervalo de tiempo y resolución
+times <- seq(0, 70, by = 1)
+#resolver el sistema de ecuaciones con función 'ode'
+out <- ode(y = init, times = times, func = sir, parms = param)
+#cambiar out a un data.frame
+out <- as.data.frame(out*N) #aqui puede multiplicar 'out' por N
+#eliminar la variable 'time' en out
+out$time <- NULL
+#mostrar 10 primeros datos
+head(out, 10)
+
+#gráfica
+matplot(x = times, y = out, type = "l",
+        xlab = "Tiempo", ylab = "S, I, R", main = "Modelo SIR básico",
+        lwd = 1, lty = 1, bty = "l", col = 2:4)
+#añadir leyenda de líneas
+legend(40, 0.7, c("Susceptibles", "Infectados", "Recuperados"), 
+       pch = 1, col = 2:4, bty = "n", cex = 1)
+
+```
+
+Note that the `echo =4 FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
