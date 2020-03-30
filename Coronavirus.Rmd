@@ -28,6 +28,7 @@ library(scatterplot3d)
 library(grid)
 library(gridExtra)
 library(dplyr)
+library(data.table)
 ```
 
 ```{r cars}
@@ -45,11 +46,16 @@ data
 ```
 
 ```{r}
-
-ggplot(data = data) +
-  geom_smooth(mapping = aes(x = Fecha, y = Casos, group = CCAA.Codigo.ISO, color = CCAA.Codigo.ISO))
+data_total <- aggregate(x = data[c("Casos","Hospitalizados", "UCI", "Fallecidos")],
+                     FUN = sum,
+                     by = list(Group.date = data$Fecha))
+data_total
+names(data_total)
+names(data_total) <- c("Fecha", "Casos", "Hospitalizados", "UCI", "Fallecidos")
+data_total
 
 ```
+
 
 ## Agrupación de datos por Provincia
 
@@ -75,8 +81,6 @@ data_PV <- filter(data, CCAA.Codigo.ISO == "PV")
 data_RI <- filter(data, CCAA.Codigo.ISO == "RI")
 ```
 
-## Cálculos
-
 
 
 ## Gráficos
@@ -84,91 +88,25 @@ data_RI <- filter(data, CCAA.Codigo.ISO == "RI")
 
 ```{r}
 
-g <- ggplot(data = data_MD) + geom_point(mapping = aes(x = Fecha, y = Casos, color = "Madrid")) +
+g <- ggplot(data = data_total) + geom_point(mapping = aes(x = Fecha, y = Casos, color = "España")) +
   labs(title = "Casos Confirmados", caption = "Data from: https://covid19.isciii.es") + 
   labs(subtitle = date()) +
   labs(x = "Fecha", y = "Cantidad") +
-  geom_point(data_CT, mapping = aes(x = Fecha, y = Casos, color = "Cataluña"))
+  geom_point(data_MD, mapping = aes(x = Fecha, y = Casos, color = "Madrid"))
 g + theme_classic() + guides(colour = guide_legend("Provincias"))
 ```
 
+
+```{r}
+
+ggplot(data = data) +
+  geom_smooth(mapping = aes(x = Fecha, y = Casos, group = CCAA.Codigo.ISO, color = CCAA.Codigo.ISO))
+
+```
+
+
 ```{r}
 grid.arrange(p1, p2, p3, p4, ncol = 2) #Varios gráficos en un mismo panel
-```
-
-
-## Gráficos
-
-```{r}
-flujos_de_caja <- function(p,n,r,ttm){
-  r <- r/100
-  cf <- c(-p, rep(n*r, ttm-1), n*(1+r))
-  cf
-}
-
-# Definimos las variables
-
-p <- 1000
-n <- 1000
-r <- 7
-ttm <- 5
-
-# Una vez creada la función, calculamos los flujos y los alojamos en
-# un objeto que llamaremos cf.
-
-cf <- flujos_de_caja(p,n,r,ttm)
-
-
-# Creamos la función `bval` que utiliza la misma lógica de la función precio() 
-# para obtener el total del valor presente de los flujos de caja.
-
-bval <- function(i, cf, t=seq(along = cf)) {
- sum(cf / (1 + i)^t)
-}
-
-
-# Por último, creamos la función YTM() que utiliza la función uniroot()
-# para hallar la raíz de la función bval() y encontrar el valor en el cual
-# se hace cero; que no es más que hallar el YTM que iguala el precio del
-# bono al valor presente de los flujos de caja.
-
-YTM <- function(cf){
-  yield <-uniroot(bval, c(0, 1), cf = cf)$root
-  yield
-}
-
-YTM(cf)
-```
-
-
-```{r}
-precios <- c(747.550, 660.000, 463.750, 391.030, 467.530, 354.580, 347.170, 340.700, 387.350, 395.770, 346.700, 403.780, 362.530, 330.850)
-
-vencimientos <- c(1,1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 14, 16, 21)
-
-cupones <- c(13.625, 7, 7.75, 6, 12.75, 9, 8.25, 7.65, 11.75, 9.25, 9.25, 11.95, 9.375, 7)
-
-rendimientos <- c()
-
-for(i in 1: length(precios)){
-  cf <- flujos_de_caja(precios[i], n = 1000, r = cupones[i], ttm = vencimientos[i])
-  rendimientos <- c(rendimientos, YTM(cf)*100)
-}
-
-datos <- data.frame(rendimientos, vencimientos)
-
-f<- ggplot(datos, aes(x = vencimientos, y = rendimientos, colour = vencimientos)) +
-    geom_point() + geom_smooth(method = "lm", se = FALSE, formula = y ~ x +I(x^2), size = 0.8) +
-  stat_poly_eq(formula = y ~ x + I(x^2), 
-                aes(label = paste(..eq.label.., ..rr.label.., sep = "~~~")), 
-                parse = TRUE, size=3, label.x.npc = "right", label.y.npc = "top")+
-  scale_x_discrete(limits=vencimientos)+
-  labs(title = "Curva de Rendimiento",
-       subtitle = "25-09-2017",x="Tiempo de vencimiento", y="Rendimiento",
-       caption = "http://synergy.vision/" ) 
-
-f
-
 ```
 
 
