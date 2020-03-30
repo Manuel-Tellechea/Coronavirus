@@ -2,7 +2,9 @@
 title: "Coronavirus"
 author: "María A. Ramírez y Manuel A. Tellechea"
 date: "3/29/2020"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -32,7 +34,8 @@ library(dplyr)
 data <- read.csv("serie_historica_acumulados.csv", header = TRUE)
 data[is.na(data)] = 0
 dim(data)
-data <- data[-c(723),] #borrando el comentario inserto en las últimas dos filas
+n <- nrow(data)
+data <-data[-c(n),] #borrando el comentario inserto en la última fila
 Fecha <- dmy(data$Fecha)
 data <- cbind(Fecha, data[,-2])
 data
@@ -74,9 +77,6 @@ data_RI <- filter(data, CCAA.Codigo.ISO == "RI")
 
 ## Cálculos
 
-```{r}
-data
-```
 
 
 ## Gráficos
