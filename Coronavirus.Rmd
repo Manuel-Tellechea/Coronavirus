@@ -93,7 +93,7 @@ AN <- ggplot(data = data_total) + geom_point(mapping = aes(x = Fecha, y = Casos,
   labs(subtitle = date()) +
   labs(x = "Fecha", y = "Cantidad") +
   geom_point(data_AN, mapping = aes(x = Fecha, y = Casos, color = "Andalucía")) +
-  theme_classic() + guides(colour = guide_legend("Provincias"))
+  theme_classic() + guides(colour = guide_legend("Datos"))
 
 
 AR <- ggplot(data = data_total) + geom_point(mapping = aes(x = Fecha, y = Casos, color = "España")) +
@@ -101,136 +101,259 @@ AR <- ggplot(data = data_total) + geom_point(mapping = aes(x = Fecha, y = Casos,
   labs(subtitle = date()) +
   labs(x = "Fecha", y = "Cantidad") +
   geom_point(data_AR, mapping = aes(x = Fecha, y = Casos, color = "Aragón")) +
-  theme_classic() + guides(colour = guide_legend("Provincias"))
+  theme_classic() + guides(colour = guide_legend("Datos"))
 
 AS <- ggplot(data = data_total) + geom_point(mapping = aes(x = Fecha, y = Casos, color = "España")) +
   labs(title = "Casos Confirmados", caption = "Data from: https://covid19.isciii.es") + 
   labs(subtitle = date()) +
   labs(x = "Fecha", y = "Cantidad") +
   geom_point(data_AS, mapping = aes(x = Fecha, y = Casos, color = "Principado de Asturias")) +
-  theme_classic() + guides(colour = guide_legend("Provincias"))
+  theme_classic() + guides(colour = guide_legend("Datos"))
 
 IB <- ggplot(data = data_total) + geom_point(mapping = aes(x = Fecha, y = Casos, color = "España")) +
   labs(title = "Casos Confirmados", caption = "Data from: https://covid19.isciii.es") + 
   labs(subtitle = date()) +
   labs(x = "Fecha", y = "Cantidad") +
   geom_point(data_IB, mapping = aes(x = Fecha, y = Casos, color = "Islas Baleares")) +
-  theme_classic() + guides(colour = guide_legend("Provincias"))
+  theme_classic() + guides(colour = guide_legend("Datos"))
 
 CN <- ggplot(data = data_total) + geom_point(mapping = aes(x = Fecha, y = Casos, color = "España")) +
   labs(title = "Casos Confirmados", caption = "Data from: https://covid19.isciii.es") + 
   labs(subtitle = date()) +
   labs(x = "Fecha", y = "Cantidad") +
   geom_point(data_CN, mapping = aes(x = Fecha, y = Casos, color = "Canarias")) +
-  theme_classic() + guides(colour = guide_legend("Provincias"))
+  theme_classic() + guides(colour = guide_legend("Datos"))
 
 CB <- ggplot(data = data_total) + geom_point(mapping = aes(x = Fecha, y = Casos, color = "España")) +
   labs(title = "Casos Confirmados", caption = "Data from: https://covid19.isciii.es") + 
   labs(subtitle = date()) +
   labs(x = "Fecha", y = "Cantidad") +
   geom_point(data_CB, mapping = aes(x = Fecha, y = Casos, color = "Cantabria")) +
-  theme_classic() + guides(colour = guide_legend("Provincias"))
+  theme_classic() + guides(colour = guide_legend("Datos"))
 
 CM <- ggplot(data = data_total) + geom_point(mapping = aes(x = Fecha, y = Casos, color = "España")) +
   labs(title = "Casos Confirmados", caption = "Data from: https://covid19.isciii.es") + 
   labs(subtitle = date()) +
   labs(x = "Fecha", y = "Cantidad") +
   geom_point(data_CM, mapping = aes(x = Fecha, y = Casos, color = "Castilla La Mancha")) +
-  theme_classic() + guides(colour = guide_legend("Provincias"))
+  theme_classic() + guides(colour = guide_legend("Datos"))
 
 CL <- ggplot(data = data_total) + geom_point(mapping = aes(x = Fecha, y = Casos, color = "España")) +
   labs(title = "Casos Confirmados", caption = "Data from: https://covid19.isciii.es") + 
   labs(subtitle = date()) +
   labs(x = "Fecha", y = "Cantidad") +
   geom_point(data_CL, mapping = aes(x = Fecha, y = Casos, color = "Castilla y León")) +
-  theme_classic() + guides(colour = guide_legend("Provincias"))
+  theme_classic() + guides(colour = guide_legend("Datos"))
 
 CT <- ggplot(data = data_total) + geom_point(mapping = aes(x = Fecha, y = Casos, color = "España")) +
   labs(title = "Casos Confirmados", caption = "Data from: https://covid19.isciii.es") + 
   labs(subtitle = date()) +
   labs(x = "Fecha", y = "Cantidad") +
   geom_point(data_CT, mapping = aes(x = Fecha, y = Casos, color = "Cataluña")) +
-  theme_classic() + guides(colour = guide_legend("Provincias"))
+  theme_classic() + guides(colour = guide_legend("Datos"))
 
 CE <- ggplot(data = data_total) + geom_point(mapping = aes(x = Fecha, y = Casos, color = "España")) +
   labs(title = "Casos Confirmados", caption = "Data from: https://covid19.isciii.es") + 
   labs(subtitle = date()) +
   labs(x = "Fecha", y = "Cantidad") +
   geom_point(data_CE, mapping = aes(x = Fecha, y = Casos, color = "Ceuta")) +
-  theme_classic() + guides(colour = guide_legend("Provincias"))
+  theme_classic() + guides(colour = guide_legend("Datos"))
 
 VC <- ggplot(data = data_total) + geom_point(mapping = aes(x = Fecha, y = Casos, color = "España")) +
   labs(title = "Casos Confirmados", caption = "Data from: https://covid19.isciii.es") + 
   labs(subtitle = date()) +
   labs(x = "Fecha", y = "Cantidad") +
   geom_point(data_VC, mapping = aes(x = Fecha, y = Casos, color = "Comunidad Valenciana")) +
-  theme_classic() + guides(colour = guide_legend("Provincias"))
+  theme_classic() + guides(colour = guide_legend("Datos"))
 
 EX <- ggplot(data = data_total) + geom_point(mapping = aes(x = Fecha, y = Casos, color = "España")) +
   labs(title = "Casos Confirmados", caption = "Data from: https://covid19.isciii.es") + 
   labs(subtitle = date()) +
   labs(x = "Fecha", y = "Cantidad") +
   geom_point(data_CE, mapping = aes(x = Fecha, y = Casos, color = "Extremadura")) +
-  theme_classic() + guides(colour = guide_legend("Provincias"))
+  theme_classic() + guides(colour = guide_legend("Datos"))
 
 GA <- ggplot(data = data_total) + geom_point(mapping = aes(x = Fecha, y = Casos, color = "España")) +
   labs(title = "Casos Confirmados", caption = "Data from: https://covid19.isciii.es") + 
   labs(subtitle = date()) +
   labs(x = "Fecha", y = "Cantidad") +
   geom_point(data_GA, mapping = aes(x = Fecha, y = Casos, color = "Galicia")) +
-  theme_classic() + guides(colour = guide_legend("Provincias"))
+  theme_classic() + guides(colour = guide_legend("Datos"))
 
 MD <- ggplot(data = data_total) + geom_point(mapping = aes(x = Fecha, y = Casos, color = "España")) +
   labs(title = "Casos Confirmados", caption = "Data from: https://covid19.isciii.es") + 
   labs(subtitle = date()) +
   labs(x = "Fecha", y = "Cantidad") +
   geom_point(data_MD, mapping = aes(x = Fecha, y = Casos, color = "Madrid")) +
-  theme_classic() + guides(colour = guide_legend("Provincias"))
+  theme_classic() + guides(colour = guide_legend("Datos"))
 
 ME <- ggplot(data = data_total) + geom_point(mapping = aes(x = Fecha, y = Casos, color = "España")) +
   labs(title = "Casos Confirmados", caption = "Data from: https://covid19.isciii.es") + 
   labs(subtitle = date()) +
   labs(x = "Fecha", y = "Cantidad") +
   geom_point(data_ME, mapping = aes(x = Fecha, y = Casos, color = "Melilla")) +
-  theme_classic() + guides(colour = guide_legend("Provincias"))
+  theme_classic() + guides(colour = guide_legend("Datos"))
 
 MC <- ggplot(data = data_total) + geom_point(mapping = aes(x = Fecha, y = Casos, color = "España")) +
   labs(title = "Casos Confirmados", caption = "Data from: https://covid19.isciii.es") + 
   labs(subtitle = date()) +
   labs(x = "Fecha", y = "Cantidad") +
   geom_point(data_MC, mapping = aes(x = Fecha, y = Casos, color = "Murcia")) +
-  theme_classic() + guides(colour = guide_legend("Provincias"))
+  theme_classic() + guides(colour = guide_legend("Datos"))
 
 NC <- ggplot(data = data_total) + geom_point(mapping = aes(x = Fecha, y = Casos, color = "España")) +
   labs(title = "Casos Confirmados", caption = "Data from: https://covid19.isciii.es") + 
   labs(subtitle = date()) +
   labs(x = "Fecha", y = "Cantidad") +
   geom_point(data_NC, mapping = aes(x = Fecha, y = Casos, color = "Navarra")) +
-  theme_classic() + guides(colour = guide_legend("Provincias"))
+  theme_classic() + guides(colour = guide_legend("Datos"))
 
 PV <- ggplot(data = data_total) + geom_point(mapping = aes(x = Fecha, y = Casos, color = "España")) +
   labs(title = "Casos Confirmados", caption = "Data from: https://covid19.isciii.es") + 
   labs(subtitle = date()) +
   labs(x = "Fecha", y = "Cantidad") +
   geom_point(data_PV, mapping = aes(x = Fecha, y = Casos, color = "País Vasco")) +
-  theme_classic() + guides(colour = guide_legend("Provincias"))
+  theme_classic() + guides(colour = guide_legend("Datos"))
 
 RI <- ggplot(data = data_total) + geom_point(mapping = aes(x = Fecha, y = Casos, color = "España")) +
   labs(title = "Casos Confirmados", caption = "Data from: https://covid19.isciii.es") + 
   labs(subtitle = date()) +
   labs(x = "Fecha", y = "Cantidad") +
   geom_point(data_RI, mapping = aes(x = Fecha, y = Casos, color = "La Rioja")) +
-  theme_classic() + guides(colour = guide_legend("Provincias"))
+  theme_classic() + guides(colour = guide_legend("Datos"))
 
 ```
 
+
+
+
+
 ```{r}
-MD
+
+AN2 <- ggplot(data = data_AN) + geom_point(mapping = aes(x = Fecha, y = Casos), color = "red") +
+  labs(title = "Casos Confirmados Andalucía", caption = "Data from: https://covid19.isciii.es") + 
+  labs(subtitle = date()) + labs(x = "Fecha", y = "Cantidad") +
+  theme_classic()
+
+AR2 <- ggplot(data = data_AR) + geom_point(mapping = aes(x = Fecha, y = Casos), color = "red") +
+  labs(title = "Casos Confirmados Aragón", caption = "Data from: https://covid19.isciii.es") + 
+  labs(subtitle = date()) + labs(x = "Fecha", y = "Cantidad") +
+  theme_classic()
+
+AS2 <- ggplot(data = data_AS) + geom_point(mapping = aes(x = Fecha, y = Casos), color = "red") +
+  labs(title = "Casos Confirmados Principado de Asturias", caption = "Data from: https://covid19.isciii.es") + 
+  labs(subtitle = date()) + labs(x = "Fecha", y = "Cantidad") +
+  theme_classic()
+
+IB2 <- ggplot(data = data_IB) + geom_point(mapping = aes(x = Fecha, y = Casos), color = "red") +
+  labs(title = "Casos Confirmados Islas Baleares", caption = "Data from: https://covid19.isciii.es") + 
+  labs(subtitle = date()) + labs(x = "Fecha", y = "Cantidad") +
+  theme_classic()
+
+CN2 <- ggplot(data = data_CN) + geom_point(mapping = aes(x = Fecha, y = Casos), color = "red") +
+  labs(title = "Casos Confirmados Canarias", caption = "Data from: https://covid19.isciii.es") + 
+  labs(subtitle = date()) + labs(x = "Fecha", y = "Cantidad") +
+  theme_classic()
+
+CB2 <- ggplot(data = data_CB) + geom_point(mapping = aes(x = Fecha, y = Casos), color = "red") +
+  labs(title = "Casos Confirmados Cantabria", caption = "Data from: https://covid19.isciii.es") + 
+  labs(subtitle = date()) + labs(x = "Fecha", y = "Cantidad") +
+  theme_classic()
+
+CM2 <- ggplot(data = data_CM) + geom_point(mapping = aes(x = Fecha, y = Casos), color = "red") +
+  labs(title = "Casos Confirmados Castilla La Mancha", caption = "Data from: https://covid19.isciii.es") + 
+  labs(subtitle = date()) + labs(x = "Fecha", y = "Cantidad") +
+  theme_classic()
+
+CL2 <- ggplot(data = data_CL) + geom_point(mapping = aes(x = Fecha, y = Casos), color = "red") +
+  labs(title = "Casos Confirmados Castilla y León", caption = "Data from: https://covid19.isciii.es") + 
+  labs(subtitle = date()) + labs(x = "Fecha", y = "Cantidad") +
+  theme_classic()
+
+CT2 <- ggplot(data = data_CT) + geom_point(mapping = aes(x = Fecha, y = Casos), color = "red") +
+  labs(title = "Casos Confirmados Cataluña", caption = "Data from: https://covid19.isciii.es") + 
+  labs(subtitle = date()) + labs(x = "Fecha", y = "Cantidad") +
+  theme_classic()
+
+CE2 <- ggplot(data = data_CE) + geom_point(mapping = aes(x = Fecha, y = Casos), color = "red") +
+  labs(title = "Casos Confirmados Ceuta", caption = "Data from: https://covid19.isciii.es") + 
+  labs(subtitle = date()) + labs(x = "Fecha", y = "Cantidad") +
+  theme_classic()
+
+VC2 <- ggplot(data = data_VC) + geom_point(mapping = aes(x = Fecha, y = Casos), color = "red") +
+  labs(title = "Casos Confirmados Comunidad Valenciana", caption = "Data from: https://covid19.isciii.es") + 
+  labs(subtitle = date()) + labs(x = "Fecha", y = "Cantidad") +
+  theme_classic()
+
+EX2 <- ggplot(data = data_EX) + geom_point(mapping = aes(x = Fecha, y = Casos), color = "red") +
+  labs(title = "Casos Confirmados Extremadura", caption = "Data from: https://covid19.isciii.es") + 
+  labs(subtitle = date()) + labs(x = "Fecha", y = "Cantidad") +
+  theme_classic()
+
+GA2 <- ggplot(data = data_GA) + geom_point(mapping = aes(x = Fecha, y = Casos), color = "red") +
+  labs(title = "Casos Confirmados Galicia", caption = "Data from: https://covid19.isciii.es") + 
+  labs(subtitle = date()) + labs(x = "Fecha", y = "Cantidad") +
+  theme_classic()
+
+MD2 <- ggplot(data = data_MD) + geom_point(mapping = aes(x = Fecha, y = Casos), color = "red") +
+  labs(title = "Casos Confirmados Madrid", caption = "Data from: https://covid19.isciii.es") + 
+  labs(subtitle = date()) + labs(x = "Fecha", y = "Cantidad") +
+  theme_classic()
+
+ME2 <- ggplot(data = data_ME) + geom_point(mapping = aes(x = Fecha, y = Casos), color = "red") +
+  labs(title = "Casos Confirmados Melilla", caption = "Data from: https://covid19.isciii.es") + 
+  labs(subtitle = date()) + labs(x = "Fecha", y = "Cantidad") +
+  theme_classic()
+
+MC2 <- ggplot(data = data_MC) + geom_point(mapping = aes(x = Fecha, y = Casos), color = "red") +
+  labs(title = "Casos Confirmados Murcia", caption = "Data from: https://covid19.isciii.es") + 
+  labs(subtitle = date()) + labs(x = "Fecha", y = "Cantidad") +
+  theme_classic()
+
+NC2 <- ggplot(data = data_NC) + geom_point(mapping = aes(x = Fecha, y = Casos), color = "red") +
+  labs(title = "Casos Confirmados Navarra", caption = "Data from: https://covid19.isciii.es") + 
+  labs(subtitle = date()) + labs(x = "Fecha", y = "Cantidad") +
+  theme_classic()
+
+PV2 <- ggplot(data = data_PV) + geom_point(mapping = aes(x = Fecha, y = Casos), color = "red") +
+  labs(title = "Casos Confirmados País Vasco", caption = "Data from: https://covid19.isciii.es") + 
+  labs(subtitle = date()) + labs(x = "Fecha", y = "Cantidad") +
+  theme_classic()
+
+RI2 <- ggplot(data = data_RI) + geom_point(mapping = aes(x = Fecha, y = Casos), color = "red") +
+  labs(title = "Casos Confirmados La Rioja", caption = "Data from: https://covid19.isciii.es") + 
+  labs(subtitle = date()) + labs(x = "Fecha", y = "Cantidad") +
+  theme_classic()
+
 ```
 
 
 ```{r}
-grid.arrange(AN, AR, AS, IB, CN, CB, CM, CL, CT, CE, VC, EX, GA, MD, ME, MC, NC, PV, RI, ncol = 20) #Varios gráficos en un mismo panel
+#Varios gráficos en un mismo panel
+grid.arrange(AN, AR, ncol = 1) 
+grid.arrange(AS, IB, ncol = 1) 
+grid.arrange(CN, CB, ncol = 1) 
+grid.arrange(CM, CL, ncol = 1) 
+grid.arrange(CT, CE, ncol = 1) 
+grid.arrange(VC, EX, ncol = 1) 
+grid.arrange(GA, RI, ncol = 1) 
+grid.arrange(ME, MC, ncol = 1) 
+grid.arrange(NC, PV, ncol = 1) 
+grid.arrange(MD, ncol = 1)
+```
+
+```{r}
+#Varios gráficos en un mismo panel
+grid.arrange(AN2, AR2, ncol = 1) 
+grid.arrange(AS2, IB2, ncol = 1) 
+grid.arrange(CN2, CB2, ncol = 1) 
+grid.arrange(CM2, CL2, ncol = 1) 
+grid.arrange(CT2, CE2, ncol = 1) 
+grid.arrange(VC2, EX2, ncol = 1) 
+grid.arrange(GA2, RI2, ncol = 1) 
+grid.arrange(ME2, MC2, ncol = 1) 
+grid.arrange(NC2, PV2, ncol = 1) 
+grid.arrange(MD2, ncol = 1)
 ```
 
 ```{r}
