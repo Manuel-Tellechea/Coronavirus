@@ -357,6 +357,16 @@ grid.arrange(MD2, ncol = 1)
 ```
 
 ```{r}
+MD2F <- ggplot(data = data_MD) + geom_point(mapping = aes(x = Fecha, y = Fallecidos), color = "red") +
+  labs(title = "Fallecidos Madrid", caption = "Data from: https://covid19.isciii.es") + 
+  labs(subtitle = date()) + labs(x = "Fecha", y = "Cantidad") +
+  theme_classic()
+MD2F
+```
+
+
+
+```{r}
 
 ggplot(data = data) +
   geom_smooth(mapping = aes(x = Fecha, y = Casos, group = CCAA.Codigo.ISO, color = CCAA.Codigo.ISO))
