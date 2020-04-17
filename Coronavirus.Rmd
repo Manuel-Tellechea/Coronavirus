@@ -37,8 +37,9 @@ data[is.na(data)] = 0
 dim(data)
 n <- nrow(data)
 data <-data[-c(n),] #borrando el comentario inserto en la última fila
+dmy(data$FECHA)
 Fecha <- dmy(data$Fecha)
-data <- cbind(Fecha, data[,-2])
+data <- cbind(Fecha, data)
 data
 names(data)
 data <- data[, c("CCAA.Codigo.ISO", "Fecha", "Casos", "Hospitalizados", "UCI", "Fallecidos")]
